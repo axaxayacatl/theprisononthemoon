@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE PRISON ON THE MOON</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Arial+Narrow:wght@300;400;700&display=swap');
+
+:root {
+  --bg: #000000;
+  --void: #050505;
+  --magenta: #ff2bd6;
+  --lunar: #eaeaea;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at center, var(--void) 0%, var(--bg) 70%);
+  font-family: "Arial Narrow", sans-serif;
+  color: var(--lunar);
+  overflow: hidden;
+}
+
+.lunar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(255,255,255,0.05), transparent 45%),
+    radial-gradient(circle at 75% 65%, rgba(255,43,214,0.06), transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(200,200,200,0.04), transparent 60%);
+  filter: blur(50px) contrast(120%);
+  animation: drift 16s infinite alternate ease-in-out;
+  opacity: 0.9;
+}
+
+@keyframes drift {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1.08) rotate(2deg); }
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 28px;
+}
+
+.title {
+  font-size: clamp(22px, 5vw, 44px);
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--lunar);
+  text-shadow: 0 0 18px rgba(255,255,255,0.12);
+  line-height: 1.4;
+}
+
+.subtitle {
+  margin-top: 18px;
+  font-size: clamp(11px, 2.5vw, 13px);
+  letter-spacing: 0.25em;
+  opacity: 0.65;
+  max-width: 560px;
+  line-height: 1.6;
+  padding: 0 10px;
+}
+
+.teaser {
+  margin-top: 42px;
+  font-size: clamp(13px, 3.6vw, 16px);
+  letter-spacing: 0.32em;
+  color: var(--magenta);
+  text-shadow: 0 0 26px rgba(255,0,170,0.45);
+}
+
+.status {
+  margin-top: 18px;
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  opacity: 0.55;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 10px 14px;
+  max-width: 85%;
+  backdrop-filter: blur(6px);
+}
+
+.glitch {
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-1px, 1px); }
+  40% { transform: translate(1px, -1px); }
+  60% { transform: translate(-2px, 0px); }
+  80% { transform: translate(2px, 1px); }
+  100% { transform: translate(0); }
+}
+
+.footer {
+  position: absolute;
+  bottom: 14px;
+  width: 100%;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  opacity: 0.35;
+  padding: 0 12px;
+}
+
+@media (max-width: 480px) {
+  .subtitle {
+    margin-top: 14px;
+    font-size: 11px;
+  }
+
+  .teaser {
+    margin-top: 34px;
+  }
+
+  .status {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="lunar"></div>
+
+<div class="container">
+
+  <div class="title glitch">
+    THE PRISON ON THE MOON
+  </div>
+
+  <div class="subtitle">
+    A lunar mixtape archive constructed from orbital emotional residue.<br>
+    Memory is stored, compressed, and returned as distorted signal fragments.<br><br>
+    LISTENING IS ENTRY. ENTRY IS PERMANENT.
+  </div>
+
+  <div class="teaser glitch">
+    THE MOON REMEMBERS LOUDER THAN YOU DO
+  </div>
+
+  <div class="status">
+    YOU WERE NEVER OFF AIR
+  </div>
+
+</div>
+
+<div class="footer">
+  LUNAR ARCHIVE NODE // SIGNAL CONTINUES WITHOUT PERMISSION
+</div>
+
+</body>
+</html>
