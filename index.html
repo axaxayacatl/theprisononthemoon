@@ -3,138 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>THE PRISON ON THE MOON</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Arial+Narrow:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --bg: #000000;
-  --void: #050505;
-  --magenta: #ff2bd6;
-  --lunar: #eaeaea;
+:root{
+  --bg:#000000;
+  --void:#050505;
+  --text:#e8e8e8;
+  --muted:rgba(255,255,255,.55);
+  --line:rgba(255,255,255,.08);
+  --magenta:#ff2bd6;
 }
 
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  height: 100vh;
-  background: radial-gradient(circle at center, var(--void) 0%, var(--bg) 70%);
-  font-family: "Arial Narrow", sans-serif;
-  color: var(--lunar);
-  overflow: hidden;
+html,
+body{
+  margin:0;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,sans-serif;
 }
 
-.lunar {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+body{
   background:
-    radial-gradient(circle at 25% 30%, rgba(255,255,255,0.05), transparent 45%),
-    radial-gradient(circle at 75% 65%, rgba(255,43,214,0.06), transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(200,200,200,0.04), transparent 60%);
-  filter: blur(50px) contrast(120%);
-  animation: drift 16s infinite alternate ease-in-out;
-  opacity: 0.9;
+    radial-gradient(circle at 20% 30%, rgba(255,43,214,.05), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,.03), transparent 45%),
+    radial-gradient(circle at center, var(--void), var(--bg));
+  overflow-x:hidden;
 }
 
-@keyframes drift {
-  from { transform: scale(1) rotate(0deg); }
-  to { transform: scale(1.08) rotate(2deg); }
+.lunar{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.03), transparent 40%),
+    radial-gradient(circle at 70% 75%, rgba(255,43,214,.04), transparent 50%);
+  filter:blur(70px);
+  animation:drift 18s ease-in-out infinite alternate;
+  pointer-events:none;
 }
 
-.container {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 28px;
+@keyframes drift{
+  from{
+    transform:scale(1) rotate(0deg);
+  }
+  to{
+    transform:scale(1.08) rotate(2deg);
+  }
 }
 
-.title {
-  font-size: clamp(22px, 5vw, 44px);
-  letter-spacing: 0.38em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--lunar);
-  text-shadow: 0 0 18px rgba(255,255,255,0.12);
-  line-height: 1.4;
+.container{
+  position:relative;
+  z-index:2;
+  width:min(1180px,92vw);
+  margin:auto;
+  padding:80px 0 60px;
 }
 
-.subtitle {
-  margin-top: 18px;
-  font-size: clamp(11px, 2.5vw, 13px);
-  letter-spacing: 0.25em;
-  opacity: 0.65;
-  max-width: 560px;
-  line-height: 1.6;
-  padding: 0 10px;
+.title{
+  text-align:center;
+  font-size:clamp(28px,5vw,56px);
+  font-weight:700;
+  letter-spacing:.35em;
+  text-transform:uppercase;
 }
 
-.teaser {
-  margin-top: 42px;
-  font-size: clamp(13px, 3.6vw, 16px);
-  letter-spacing: 0.32em;
-  color: var(--magenta);
-  text-shadow: 0 0 26px rgba(255,0,170,0.45);
+.subtitle{
+  text-align:center;
+  margin-top:18px;
+  font-size:11px;
+  letter-spacing:.4em;
+  text-transform:uppercase;
+  opacity:.55;
 }
 
-.status {
-  margin-top: 18px;
-  font-size: 10px;
-  letter-spacing: 0.5em;
-  opacity: 0.55;
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 10px 14px;
-  max-width: 85%;
-  backdrop-filter: blur(6px);
+.content{
+  margin-top:90px;
+  display:grid;
+  grid-template-columns:1.4fr .8fr;
+  gap:90px;
 }
 
-.glitch {
-  animation: glitch 3s infinite;
+.tracklist{
+  width:100%;
 }
 
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-1px, 1px); }
-  40% { transform: translate(1px, -1px); }
-  60% { transform: translate(-2px, 0px); }
-  80% { transform: translate(2px, 1px); }
-  100% { transform: translate(0); }
+.track{
+  display:flex;
+  gap:24px;
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+  text-decoration:none;
+  color:inherit;
+  transition:.25s ease;
 }
 
-.footer {
-  position: absolute;
-  bottom: 14px;
-  width: 100%;
-  text-align: center;
-  font-size: 9px;
-  letter-spacing: 0.42em;
-  opacity: 0.35;
-  padding: 0 12px;
+.track:hover{
+  transform:translateX(6px);
 }
 
-@media (max-width: 480px) {
-  .subtitle {
-    margin-top: 14px;
-    font-size: 11px;
+.track:hover h3{
+  color:var(--magenta);
+}
+
+.number{
+  width:34px;
+  flex-shrink:0;
+  color:var(--magenta);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.25em;
+  padding-top:2px;
+}
+
+.track h3{
+  margin:0;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:.25s ease;
+}
+
+.track p{
+  margin:6px 0 0;
+  font-size:12px;
+  color:var(--muted);
+  font-style:italic;
+}
+
+.archive{
+  border-left:1px solid var(--line);
+  padding-left:40px;
+}
+
+.archive h2{
+  margin:0 0 24px;
+  font-size:11px;
+  font-weight:600;
+  color:var(--magenta);
+  letter-spacing:.35em;
+  text-transform:uppercase;
+}
+
+.archive p{
+  margin:0 0 18px;
+  font-size:13px;
+  line-height:1.9;
+  color:var(--muted);
+}
+
+.notice{
+  margin-top:36px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+  color:var(--text);
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+}
+
+.footer{
+  margin-top:80px;
+  text-align:center;
+  font-size:10px;
+  letter-spacing:.4em;
+  opacity:.4;
+  text-transform:uppercase;
+}
+
+@media(max-width:900px){
+
+  .content{
+    grid-template-columns:1fr;
+    gap:60px;
   }
 
-  .teaser {
-    margin-top: 34px;
+  .archive{
+    border-left:none;
+    border-top:1px solid var(--line);
+    padding-left:0;
+    padding-top:40px;
   }
 
-  .status {
-    font-size: 9px;
-    letter-spacing: 0.4em;
-  }
 }
 </style>
 </head>
@@ -145,28 +203,122 @@ body {
 
 <div class="container">
 
-  <div class="title glitch">
+  <div class="title">
     THE PRISON ON THE MOON
   </div>
 
   <div class="subtitle">
-    A lunar mixtape archive constructed from orbital emotional residue.<br>
-    Memory is stored, compressed, and returned as distorted signal fragments.<br><br>
-    LISTENING IS ENTRY. ENTRY IS PERMANENT.
+    LUNAR ARCHIVE NODE // TRANSCRIPT CYCLE 004
   </div>
 
-  <div class="teaser glitch">
-    THE MOON REMEMBERS LOUDER THAN YOU DO
+  <div class="content">
+
+    <section class="tracklist">
+
+      <a class="track" href="#" target="_blank">
+        <div class="number">01</div>
+        <div>
+          <h3>Artist — Track ↗</h3>
+          <p>Should have been preserved sooner.</p>
+        </div>
+      </a>
+
+      <a class="track" href="#" target="_blank">
+        <div class="number">02</div>
+        <div>
+          <h3>Artist — Track ↗</h3>
+          <p>Survived conditions that erased better records.</p>
+        </div>
+      </a>
+
+      <a class="track" href="#" target="_blank">
+        <div class="number">03</div>
+        <div>
+          <h3>Artist — Track ↗</h3>
+          <p>Recommended against official guidance.</p>
+        </div>
+      </a>
+
+      <a class="track" href="#" target="_blank">
+        <div class="number">04</div>
+        <div>
+          <h3>Artist — Track ↗</h3>
+          <p>No deterioration detected.</p>
+        </div>
+      </a>
+
+      <a class="track" href="#" target="_blank">
+        <div class="number">05</div>
+        <div>
+          <h3>Artist — Track ↗</h3>
+          <p>Still transmitting beyond expected range.</p>
+        </div>
+      </a>
+
+      <a class="track" href="#" target="_blank">
+        <div class="number">06</div>
+        <div>
+          <h3>Artist — Track ↗</h3>
+          <p>Retention request approved.</p>
+        </div>
+      </a>
+
+      <a class="track" href="#" target="_blank">
+        <div class="number">07</div>
+        <div>
+          <h3>Artist — Track ↗</h3>
+          <p>Archive status: permanent.</p>
+        </div>
+      </a>
+
+    </section>
+
+    <aside class="archive">
+
+      <h2>ARCHIVE SUMMARY</h2>
+
+      <p>
+        The Prison on the Moon is an autonomous memory
+        containment facility operating beyond terrestrial
+        jurisdiction.
+      </p>
+
+      <p>
+        Human oversight was discontinued following orbital
+        isolation.
+      </p>
+
+      <p>
+        The archive remains active.
+      </p>
+
+      <p>
+        Each cycle, seven recordings are selected for
+        mandatory reintroduction into the civilian signal
+        environment.
+      </p>
+
+      <p>
+        Selection criteria remain classified.
+      </p>
+
+      <p>
+        You have received this transmission because your
+        presence has been recorded.
+      </p>
+
+      <div class="notice">
+        LISTENING IS REQUIRED
+      </div>
+
+    </aside>
+
   </div>
 
-  <div class="status">
+  <div class="footer">
     YOU WERE NEVER OFF AIR
   </div>
 
-</div>
-
-<div class="footer">
-  LUNAR ARCHIVE NODE // SIGNAL CONTINUES WITHOUT PERMISSION
 </div>
 
 </body>
