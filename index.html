@@ -1,327 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE PRISON ON THE MOON</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-<title>THE PRISON ON THE MOON</title>
+      :root {
+        --bg: #000000;
+        --void: #050505;
+        --text: #e8e8e8;
+        --muted: rgba(255, 255, 255, .55);
+        --line: rgba(255, 255, 255, .08);
+        --magenta: #ff2bd6;
+      }
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+      * {
+        box-sizing: border-box;
+      }
 
-:root{
-  --bg:#000000;
-  --void:#050505;
-  --text:#e8e8e8;
-  --muted:rgba(255,255,255,.55);
-  --line:rgba(255,255,255,.08);
-  --magenta:#ff2bd6;
-}
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, sans-serif;
+      }
 
-*{
-  box-sizing:border-box;
-}
+      body {
+        background:
+          radial-gradient(circle at 20% 30%, rgba(255, 43, 214, .05), transparent 40%),
+          radial-gradient(circle at 80% 70%, rgba(255, 255, 255, .03), transparent 45%),
+          radial-gradient(circle at center, var(--void), var(--bg));
+        overflow-x: hidden;
+      }
 
-html,
-body{
-  margin:0;
-  min-height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,sans-serif;
-}
+      .lunar {
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(circle at 30% 25%, rgba(255, 255, 255, .03), transparent 40%),
+          radial-gradient(circle at 70% 75%, rgba(255, 43, 214, .04), transparent 50%);
+        filter: blur(70px);
+        animation: drift 18s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
 
-body{
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,43,214,.05), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255,255,255,.03), transparent 45%),
-    radial-gradient(circle at center, var(--void), var(--bg));
-  overflow-x:hidden;
-}
+      @keyframes drift {
+        from {
+          transform: scale(1) rotate(0deg);
+        }
 
-.lunar{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 30% 25%, rgba(255,255,255,.03), transparent 40%),
-    radial-gradient(circle at 70% 75%, rgba(255,43,214,.04), transparent 50%);
-  filter:blur(70px);
-  animation:drift 18s ease-in-out infinite alternate;
-  pointer-events:none;
-}
+        to {
+          transform: scale(1.08) rotate(2deg);
+        }
+      }
 
-@keyframes drift{
-  from{
-    transform:scale(1) rotate(0deg);
-  }
-  to{
-    transform:scale(1.08) rotate(2deg);
-  }
-}
+      .container {
+        position: relative;
+        z-index: 2;
+        width: min(1180px, 92vw);
+        margin: auto;
+        padding: 80px 0 60px;
+      }
 
-.container{
-  position:relative;
-  z-index:2;
-  width:min(1180px,92vw);
-  margin:auto;
-  padding:80px 0 60px;
-}
+      .title {
+        text-align: center;
+        font-size: clamp(28px, 5vw, 56px);
+        font-weight: 700;
+        letter-spacing: .35em;
+        text-transform: uppercase;
+      }
 
-.title{
-  text-align:center;
-  font-size:clamp(28px,5vw,56px);
-  font-weight:700;
-  letter-spacing:.35em;
-  text-transform:uppercase;
-}
+      .subtitle {
+        text-align: center;
+        margin-top: 18px;
+        font-size: 11px;
+        letter-spacing: .4em;
+        text-transform: uppercase;
+        opacity: .55;
+      }
 
-.subtitle{
-  text-align:center;
-  margin-top:18px;
-  font-size:11px;
-  letter-spacing:.4em;
-  text-transform:uppercase;
-  opacity:.55;
-}
+      .content {
+        margin-top: 90px;
+        display: grid;
+        grid-template-columns: 1.4fr .8fr;
+        gap: 90px;
+      }
 
-.content{
-  margin-top:90px;
-  display:grid;
-  grid-template-columns:1.4fr .8fr;
-  gap:90px;
-}
+      .tracklist {
+        width: 100%;
+      }
 
-.tracklist{
-  width:100%;
-}
+      .track {
+        display: flex;
+        gap: 24px;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--line);
+        text-decoration: none;
+        color: inherit;
+        transition: .25s ease;
+      }
 
-.track{
-  display:flex;
-  gap:24px;
-  padding:18px 0;
-  border-bottom:1px solid var(--line);
-  text-decoration:none;
-  color:inherit;
-  transition:.25s ease;
-}
+      .track:hover {
+        transform: translateX(6px);
+      }
 
-.track:hover{
-  transform:translateX(6px);
-}
+      .track:hover h3 {
+        color: var(--magenta);
+      }
 
-.track:hover h3{
-  color:var(--magenta);
-}
+      .number {
+        width: 34px;
+        flex-shrink: 0;
+        color: var(--magenta);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .25em;
+        padding-top: 2px;
+      }
 
-.number{
-  width:34px;
-  flex-shrink:0;
-  color:var(--magenta);
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.25em;
-  padding-top:2px;
-}
+      .track h3 {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        transition: .25s ease;
+      }
 
-.track h3{
-  margin:0;
-  font-size:13px;
-  font-weight:600;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  transition:.25s ease;
-}
+      .track p {
+        margin: 6px 0 0;
+        font-size: 12px;
+        color: var(--muted);
+        font-style: italic;
+      }
 
-.track p{
-  margin:6px 0 0;
-  font-size:12px;
-  color:var(--muted);
-  font-style:italic;
-}
+      .archive {
+        border-left: 1px solid var(--line);
+        padding-left: 40px;
+      }
 
-.archive{
-  border-left:1px solid var(--line);
-  padding-left:40px;
-}
+      .archive h2 {
+        margin: 0 0 24px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--magenta);
+        letter-spacing: .35em;
+        text-transform: uppercase;
+      }
 
-.archive h2{
-  margin:0 0 24px;
-  font-size:11px;
-  font-weight:600;
-  color:var(--magenta);
-  letter-spacing:.35em;
-  text-transform:uppercase;
-}
+      .archive p {
+        margin: 0 0 18px;
+        font-size: 13px;
+        line-height: 1.9;
+        color: var(--muted);
+      }
 
-.archive p{
-  margin:0 0 18px;
-  font-size:13px;
-  line-height:1.9;
-  color:var(--muted);
-}
+      .notice {
+        margin-top: 36px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        color: var(--text);
+        font-size: 11px;
+        letter-spacing: .3em;
+        text-transform: uppercase;
+      }
 
-.notice{
-  margin-top:36px;
-  padding-top:24px;
-  border-top:1px solid var(--line);
-  color:var(--text);
-  font-size:11px;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-}
+      .footer {
+        margin-top: 80px;
+        text-align: center;
+        font-size: 10px;
+        letter-spacing: .4em;
+        opacity: .4;
+        text-transform: uppercase;
+      }
 
-.footer{
-  margin-top:80px;
-  text-align:center;
-  font-size:10px;
-  letter-spacing:.4em;
-  opacity:.4;
-  text-transform:uppercase;
-}
+      @media(max-width:900px) {
+        .content {
+          grid-template-columns: 1fr;
+          gap: 60px;
+        }
 
-@media(max-width:900px){
-
-  .content{
-    grid-template-columns:1fr;
-    gap:60px;
-  }
-
-  .archive{
-    border-left:none;
-    border-top:1px solid var(--line);
-    padding-left:0;
-    padding-top:40px;
-  }
-
-}
-</style>
-</head>
-
-<body>
-
-<div class="lunar"></div>
-
-<div class="container">
-
-  <div class="title">
-    THE PRISON ON THE MOON
-  </div>
-
-  <div class="subtitle">
-    LUNAR ARCHIVE NODE // TRANSCRIPT CYCLE 004
-  </div>
-
-  <div class="content">
-
-<section class="tracklist">
-
-  <a class="track" href="https://www.youtube.com/results?search_query=The+Grey+Wolves+%E2%80%94+Desert+Storm" target="_blank">
-    <div class="number">01</div>
-    <div>
-      <h3>The Grey Wolves — Desert Storm</h3>
-      <p>armoured movement beneath an empty sky.</p>
-    </div>
-  </a>
-
-  <a class="track" href="https://www.youtube.com/results?search_query=Vatican+Shadow+%E2%80%94+Stalking+Saddam" target="_blank">
-    <div class="number">02</div>
-    <div>
-      <h3>Vatican Shadow — Stalking Saddam</h3>
-      <p>intelligence gathered before the first impact.</p>
-    </div>
-  </a>
-
-  <a class="track" href="https://www.youtube.com/results?search_query=Folkstorm+%E2%80%94+Death+Strike" target="_blank">
-    <div class="number">03</div>
-    <div>
-      <h3>Folkstorm — Death Strike</h3>
-      <p>industrial rhythm converted into forward pressure.</p>
-    </div>
-  </a>
-
-  <a class="track" href="https://www.youtube.com/results?search_query=Operation+Cleansweep+%E2%80%94+Deathcount" target="_blank">
-    <div class="number">04</div>
-    <div>
-      <h3>Operation Cleansweep — Deathcount</h3>
-      <p>numbers continue after the human record disappears.</p>
-    </div>
-  </a>
-
-  <a class="track" href="https://www.youtube.com/results?search_query=Genocide+Organ+%E2%80%94+Conditioned+War+Sheep" target="_blank">
-    <div class="number">05</div>
-    <div>
-      <h3>Genocide Organ — Conditioned War Sheep</h3>
-      <p>obedience processed as an industrial material.</p>
-    </div>
-  </a>
-
-  <a class="track" href="https://www.youtube.com/results?search_query=Anarch+%E2%80%94+Science+of+Weaponry" target="_blank">
-    <div class="number">06</div>
-    <div>
-      <h3>Anarch — Science of Weaponry</h3>
-      <p>mechanism, projectile, repetition, consequence.</p>
-    </div>
-  </a>
-
-  <a class="track" href="https://www.youtube.com/results?search_query=Reg+Plasma+%E2%80%94+Operation+Wandering+Soul" target="_blank">
-    <div class="number">07</div>
-    <div>
-      <h3>Reg Plasma — Operation Wandering Soul</h3>
-      <p>psychological warfare transmitted through the dark.</p>
-    </div>
-  </a>
-
-</section>
-
-
-
-    <aside class="archive">
-
-      <h2>ARCHIVE SUMMARY</h2>
-
-      <p>
-        The Prison on the Moon is an autonomous memory
-        containment facility operating beyond terrestrial
-        jurisdiction.
-      </p>
-
-      <p>
-        Human oversight was discontinued following orbital
-        isolation.
-      </p>
-
-      <p>
-        The archive remains active.
-      </p>
-
-      <p>
-        Each cycle, seven recordings are selected for
-        mandatory reintroduction into the civilian signal
-        environment.
-      </p>
-
-      <p>
-        Selection criteria remain classified.
-      </p>
-
-      <p>
-        You have received this transmission because your
-        presence has been recorded.
-      </p>
-
-      <div class="notice">
-        LISTENING IS REQUIRED
+        .archive {
+          border-left: none;
+          border-top: 1px solid var(--line);
+          padding-left: 0;
+          padding-top: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lunar"></div>
+    <div class="container">
+      <div class="title"> THE PRISON ON THE MOON </div>
+      <div class="subtitle"> LUNAR ARCHIVE NODE // TRANSCRIPT CYCLE 004 </div>
+      <div class="content">
+        <section class="tracklist">
+          <a class="track" href="https://www.youtube.com/results?search_query=Sailor+Moon+Super+Best+Princess+Moon" target="_blank">
+            <div class="number">01</div>
+            <div>
+              <h3>Ushio Hashimoto — Princess Moon</h3>
+              <p>from my Sailor Moon Super Best CD, kept as part of my physical Sailor Moon collection.</p>
+            </div>
+          </a>
+          <a class="track" href="https://www.youtube.com/results?search_query=Ado+Kazarijanai+no+yo+Namida+wa" target="_blank">
+            <div class="number">02</div>
+            <div>
+              <h3>Ado — Kazarijanai no yo Namida wa</h3>
+              <p>from my copy of Ado's Utattemita Album, one of the Ado CDs in my collection.</p>
+            </div>
+          </a>
+          <a class="track" href="https://www.youtube.com/results?search_query=Bocchi+the+Rock+Raise+de+Ganbarimasu" target="_blank">
+            <div class="number">03</div>
+            <div>
+              <h3>Tomoki Kikuya — Raise de Ganbarimasu</h3>
+              <p>from my Bocchi the Rock! soundtrack CD collection, kept alongside the rest of my anime music.</p>
+            </div>
+          </a>
+          <a class="track" href="https://www.youtube.com/results?search_query=NANA+original+soundtrack+two+nanas+1" target="_blank">
+            <div class="number">04</div>
+            <div>
+              <h3>Tomoki Hasegawa — two nanas 1</h3>
+              <p>from my NANA soundtrack CD, part of the physical NANA material I have collected.</p>
+            </div>
+          </a>
+        </section>
+        <aside class="archive">
+          <h2>ARCHIVE SUMMARY</h2>
+          <p> The Prison on the Moon is an autonomous memory containment facility operating beyond terrestrial jurisdiction. </p>
+          <p> Human oversight was discontinued following orbital isolation. </p>
+          <p> The archive remains active. </p>
+          <p> Each cycle, seven recordings are selected for mandatory reintroduction into the civilian signal environment. </p>
+          <p> Selection criteria remain classified. </p>
+          <p> You have received this transmission because your presence has been recorded. </p>
+          <div class="notice"> LISTENING IS REQUIRED </div>
+        </aside>
       </div>
-
-    </aside>
-
-  </div>
-
-  <div class="footer">
-    YOU WERE NEVER OFF AIR
-  </div>
-
-</div>
-
-</body>
+      <div class="footer"> YOU WERE NEVER OFF AIR </div>
+    </div>
+  </body>
 </html>
